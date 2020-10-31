@@ -21,6 +21,9 @@ include("getmsg.php");
             border-radius: 30px;
             
         }    
+        .icoTop:hover {
+            background-color: 008000;
+        }
         .icoDown {
             background-image: url(./img/arrow-down-circle.svg);
             background-position: center;
@@ -30,10 +33,23 @@ include("getmsg.php");
             border-radius: 30px;          
         }
 
+        .icoDown:hover {
+            background-color: red;
+        }
+
         .btnColorL {
                         
         }
 
+        .footerCss {
+            font-size: 8pt;
+            display: flex;
+            background-color: white;
+            align-content: center;
+            justify-content: center;
+            
+        }
+        
     </style>
 
 </head>
@@ -127,35 +143,83 @@ include("getmsg.php");
         var ind = 0
 
 
-        function criarDiv(item, indice) {              
+        function criarDiv(item, indice) {       
+
+            var user = 0;       
                
-                var folha = document.getElementById("top");   
-                var cardrow1 = document.createElement('div');
-                var cardcolLv1 = document.createElement('div');
-                var cardrowLv2 = document.createElement('div');
-                var cardcol1 = document.createElement('div');
-                var cardcol2 = document.createElement('div');                
-                var cardtop = document.createElement('a');                
-                var cardown = document.createElement('a'); 
-                var card = document.createElement('div');
-                var cardh = document.createElement('div');
-                var cardb = document.createElement('div');
-                var cardf = document.createElement('div');
-                cardrow1.classList.add("row", 'my-5', "w-75");
+                var folha = document.getElementById("top");  // criar na aba 'top'
+
+                //<create> 
+                var cardrow1 = document.createElement('div'); //linha
+                var cardcolLv1 = document.createElement('div'); //coluna
+                var cardrowLv2 = document.createElement('div'); //linha dentro da coluna
+                var cardcol1 = document.createElement('div'); //coluna1 dentro da segunda linha
+                var cardcol2 = document.createElement('div'); //coluna2 junto com a coluna1  
+
+                var cardtop = document.createElement('a'); //botao like               
+                var cardown = document.createElement('a'); //botao dislike
+
+                var comment = document.createElement('a'); //criar 'a' link - comment
+                var nomecom = document.createTextNode("Comment"); //nome ao link comment
+                var share = document.createElement('a'); //criar 'a' link - share
+                var nomeshar = document.createTextNode("Share"); // nome ao link share
+                var savepost = document.createElement('a'); // criar 'a' link - save post
+                var nomesave = document.createTextNode("Save"); //  nome ao link save
+                var hidepost = document.createElement('a'); //criar 'a' link hidepost
+                var nomehide = document.createTextNode("Hide"); // nome ao link hide
+                var report = document.createElement('a'); // criar 'a' link - report
+                var nomereport = document.createTextNode("Report"); // nome ao link report
+
+                var card = document.createElement('div'); //card bootstrap
+                var cardh = document.createElement('div'); //header
+                var cardb = document.createElement('div'); //body
+                var cardf = document.createElement('div'); //footer
+                //</create
+
+
+                cardrow1.classList.add("row", 'my-5', "w-75"); 
                 cardcolLv1.classList.add("col-sm-8", "my-auto");     //my-auto centraliza a row             
                 cardrowLv2.classList.add("row");                          
                 cardcol1.classList.add("col-sm-2", "my-auto");
                 cardcol2.classList.add("col-sm-8", "align-self-center");
+
                 card.classList.add("card");
-               // cardh.classList.add("card-header", "py-1");
+                
                 cardb.classList.add("card-body", "col-sm-12", "myauto"); 
                 cardh.textContent = "User";
                 cardb.textContent = msg[indice];
-                cardf.classList.add("card-footer");
+                cardf.classList.add("card-footer", "footerCss", "py-2");
+
+                //<links>
+                comment.setAttribute('href', 'comment.php');                
+                comment.appendChild(nomecom);
+                comment.classList.add("mr-5")
+                
+                share.setAttribute('href', 'share.php');
+                share.appendChild(nomeshar);
+                share.classList.add("mr-5");
+
+                savepost.setAttribute('href', 'save.php');
+                savepost.appendChild(nomesave);
+                savepost.classList.add("mr-5");
+
+                hidepost.setAttribute('href', "hide.php");
+                hidepost.appendChild(nomehide);
+                hidepost.classList.add("mr-5");  
+
+                report.setAttribute('href', 'report.php');
+                report.appendChild(nomereport);              
+
+                cardf.appendChild(comment);
+                cardf.appendChild(share);
+                cardf.appendChild(savepost);
+                cardf.appendChild(hidepost);
+                cardf.appendChild(report);    
+                //</links>
+
                 cardtop.classList.add("btn", "btnColorL", "mx-2", "my-2", "icoTop", "d-block");
-                cardtop.setAttribute('href', 'like.php');                
-                //cardtop.src = "./img/arrow-up-square.svg";
-                //cardtop.onclick = "";                
+                cardtop.setAttribute('href', 'like.php');                              
+                                                
                 cardown.classList.add("btn", "btnColorD", "mx-2", "my-2", "icoDown", "d-block");
                 cardown.setAttribute('href', 'dislike.php');                
                 folha.appendChild(cardrow1);  
@@ -178,8 +242,9 @@ include("getmsg.php");
             
                 msg.forEach(criarDiv);   
                     
+            
 
-                  
+                             
 
     </script>
 
