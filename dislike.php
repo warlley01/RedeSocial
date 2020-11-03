@@ -3,7 +3,7 @@
 include("conexao.php");
 
 //selecionar user
-$selec = "SELECT * FROM bdtabela WHERE id = 1";
+$selec = "SELECT * FROM bdtabela WHERE id = 26";
 $result = mysqli_query($conectar, $selec);
 
 if($result === FALSE){

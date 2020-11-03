@@ -22,7 +22,7 @@ include("getmsg.php");
             
         }    
         .icoTop:hover {
-            background-color: 008000;
+            background-color: #33ff33;
         }
         .icoDown {
             background-image: url(./img/arrow-down-circle.svg);
@@ -34,7 +34,7 @@ include("getmsg.php");
         }
 
         .icoDown:hover {
-            background-color: red;
+            background-color:  #ff981a;
         }
 
         .btnColorL {
@@ -44,12 +44,21 @@ include("getmsg.php");
         .footerCss {
             font-size: 8pt;
             display: flex;
-            background-color: white;
-            align-content: center;
-            justify-content: center;
-            
+            background-color: white;           
+        }
+
+        .profileImg {           
+            border-style: solid;
+            border-width: 1px;           
+            border-color: 949494;
+            border-radius: 5px;
         }
         
+        .contadorStyle {
+            color: black;
+            font-size: 8pt;            
+        }
+
     </style>
 
 </head>
@@ -96,12 +105,16 @@ include("getmsg.php");
                     </div>
                     
                     <div class="modal-body">                    
-                        <label>Digite sua mensagem</label><br>
-                        <form method="POST" action="postmsg.php">
-                            <textarea rows="4" cols="40" name="mensagem"></textarea>                            
-                        </div>
-                        <div class="modal-footer">
-                            <input type="submit" class="btn btn-success"  value="Post">
+                        <form method="POST" action="postmsg.php" enctype="multipart/form-data">
+                            <label>Usuario</label>
+                            <input type="text" name="userInput"><br><br>
+                            <label>Digite sua mensagem</label><br>
+                                <textarea rows="4" cols="40" name="mensagem"></textarea>                            
+                            </div>
+                            <input type="hidden" name="size" value="1000000">
+                            <input type="file" name="imgInput">
+                            <div class="modal-footer">
+                                <input type="submit" name="upload" class="btn btn-success"  value="Post">
                         </form>                        
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
@@ -113,24 +126,43 @@ include("getmsg.php");
     <!--TabPostagens-->
     <div id="contain" class="container">
 
-        <ul class="nav nav-pills justify-content-start ml-3 mt-3 mb-3 " id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active btn-success mr-2 " id="home-tab" data-toggle="pill" href="#top" role="tab" aria-controls="home" aria-selected="true">Top</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link btn-primary" id="profile-tab" data-toggle="pill" href="#new" role="tab" aria-controls="profile" aria-selected="false">New</a>
-            </li>
-        </ul>
+        <div class="row">
+            <div class="col-sm-8">
+                <ul class="nav nav-pills justify-content-start ml-3 mt-3 mb-3 " id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active btn-success mr-2 " id="home-tab" data-toggle="pill" href="#top" role="tab" aria-controls="home" aria-selected="true">Top</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link btn-primary" id="profile-tab" data-toggle="pill" href="#new" role="tab" aria-controls="profile" aria-selected="false">New</a>
+                    </li>
+                </ul>
 
-        <div class="tab-content" id="myTabContent">
-            <div id="top" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
-                            
+                <div class="tab-content" id="myTabContent">
+                    <div id="top" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                    
 
-            </div>
-            <div id="new" class="tab-pane fade" role="tabpanel" aria-labelledby="contact-tab">
+                    </div>
+                    <div id="new" class="tab-pane fade" role="tabpanel" aria-labelledby="contact-tab">
+                        
+                                            
+                    </div>
+                </div>
+            </div>      
+            
+            <div class="col-md-4 mt-3 pt-3">                
+                <div class="card my-5">
+                    <div class="card-header bg-light">Communities</div>                    
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Series</li>                             
+                            <li class="list-group-item">Movies</li>
+                            <li class="list-group-item">Sports</li>
+                            <li class="list-group-item">Gaming</li>
+                        </ul>
+                                   
+                </div>  
                 
-                                      
-            </div>
+            </div> 
+            
         </div>
 
     </div>
@@ -140,25 +172,39 @@ include("getmsg.php");
 
         var msg = <?php echo json_encode($msg) ?>
 
-        var ind = 0
 
+        var ponts = <?php echo json_encode($ponts)?>
 
-        function criarDiv(item, indice) {       
+        var user = <?php echo json_encode($user) ?>
 
-            var user = 0;       
+        var nome = String(user);
+        
+
+        function criarDiv(item, indice) {                 
                
                 var folha = document.getElementById("top");  // criar na aba 'top'
 
                 //<create> 
                 var cardrow1 = document.createElement('div'); //linha
                 var cardcolLv1 = document.createElement('div'); //coluna
-                var cardrowLv2 = document.createElement('div'); //linha dentro da coluna
-                var cardcol1 = document.createElement('div'); //coluna1 dentro da segunda linha
-                var cardcol2 = document.createElement('div'); //coluna2 junto com a coluna1  
+                var cardrowLv2 = document.createElement('div'); //linha 1 dentro da coluna
+                var cardrowLv3 = document.createElement('div'); // linha 2 dentro da coluna
+                var cardcol1 = document.createElement('div');                 
+                var cardcol2 = document.createElement('img');   
+                var cardcol3 = document.createElement('div');
+                var col2row2 = document.createElement('div'); 
+                var col3row2 = document.createElement('div');
+               
+                var user = document.createElement('a');
+                var username = document.createTextNode('warlley');
+                
 
-                var cardtop = document.createElement('a'); //botao like               
+                var cardtop = document.createElement('a'); //botao like 
+                var cardContador = document.createElement('div'); //contador                              
                 var cardown = document.createElement('a'); //botao dislike
 
+                var join = document.createElement('a'); //criar 'a' link - join
+                var nomejoin = document.createTextNode("+Join");
                 var comment = document.createElement('a'); //criar 'a' link - comment
                 var nomecom = document.createTextNode("Comment"); //nome ao link comment
                 var share = document.createElement('a'); //criar 'a' link - share
@@ -171,29 +217,39 @@ include("getmsg.php");
                 var nomereport = document.createTextNode("Report"); // nome ao link report
 
                 var card = document.createElement('div'); //card bootstrap
-                var cardh = document.createElement('div'); //header
+                var cardimg = document.createElement('img'); //header
                 var cardb = document.createElement('div'); //body
                 var cardf = document.createElement('div'); //footer
                 //</create
 
 
-                cardrow1.classList.add("row", 'my-5', "w-75"); 
-                cardcolLv1.classList.add("col-sm-8", "my-auto");     //my-auto centraliza a row             
+                cardrow1.classList.add("row", 'my-4', "w-100"); 
+                cardcolLv1.classList.add("col-sm-12", "py-0");     //my-auto centraliza a row             
                 cardrowLv2.classList.add("row");                          
-                cardcol1.classList.add("col-sm-2", "my-auto");
-                cardcol2.classList.add("col-sm-8", "align-self-center");
+                cardrowLv3.classList.add("row");
+                cardcol1.classList.add("col-sm-1", "my-2", "mx-2", "flex-column", "d-flex", "align-items-center");
+                cardcol2.classList.add("col-sm-1", "profileImg", "my-auto", "ml-2", "px-0", "py-0");
+                cardcol3.classList.add("col-sm-12", "align-self-center", "py-0");
+                col2row2.classList.add("col-sm-6");
+                col3row2.classList.add("col-sm-8", "align-self-center",  "mx-auto");
+                join.classList.add("btn", "btn-primary", "float-right", "px-1", "mx-2");
 
                 card.classList.add("card");
                 
-                cardb.classList.add("card-body", "col-sm-12", "myauto"); 
-                cardh.textContent = "User";
+
+                cardb.classList.add("card-body", "col-sm-12", "py-0", "mb-2"); 
+                cardContador.textContent = ponts[indice];
                 cardb.textContent = msg[indice];
-                cardf.classList.add("card-footer", "footerCss", "py-2");
+                cardContador.classList.add("btn", "contadorStyle", "px-0", "py-0", "my-2", "d-flexbox", "justify-content-center");
+                cardimg.classList.add("card-img-bottom");
+                cardimg.src = "./imagesUpload/836947.jpg";
+                
+                cardf.classList.add("card-footer", "footerCss", "py-2", "justify-content-start");
 
                 //<links>
                 comment.setAttribute('href', 'comment.php');                
                 comment.appendChild(nomecom);
-                comment.classList.add("mr-5")
+                comment.classList.add("mr-5");
                 
                 share.setAttribute('href', 'share.php');
                 share.appendChild(nomeshar);
@@ -208,8 +264,14 @@ include("getmsg.php");
                 hidepost.classList.add("mr-5");  
 
                 report.setAttribute('href', 'report.php');
-                report.appendChild(nomereport);              
+                report.appendChild(nomereport);  
 
+                user.setAttribute('href', 'user.php');
+                user.appendChild(username);
+
+                join.setAttribute('href', 'join.php');
+                join.appendChild(nomejoin);
+                
                 cardf.appendChild(comment);
                 cardf.appendChild(share);
                 cardf.appendChild(savepost);
@@ -217,27 +279,35 @@ include("getmsg.php");
                 cardf.appendChild(report);    
                 //</links>
 
-                cardtop.classList.add("btn", "btnColorL", "mx-2", "my-2", "icoTop", "d-block");
-                cardtop.setAttribute('href', 'like.php');                              
-                                                
-                cardown.classList.add("btn", "btnColorD", "mx-2", "my-2", "icoDown", "d-block");
-                cardown.setAttribute('href', 'dislike.php');                
+                cardtop.classList.add("btn", "btnColorL", "mx-1", "mt-2", "icoTop", "d-flexbox", "px-0", "justify-content-center");
+                cardtop.setAttribute('href', 'like.php');  
+                cardown.classList.add("btn", "btnColorD", "mx-1", "mb-2", "icoDown", "d-flexbox", "px-0", "justify-content-center");
+                cardown.setAttribute('href', 'dislike.php');
+               
+
+                cardcol2.src = "./img/profile-photo.png";      
+                user.classList.add("my-auto", "mx-2");                                        
+
                 folha.appendChild(cardrow1);  
                 cardrow1.appendChild(cardcolLv1);
                 cardcolLv1.appendChild(cardrowLv2);
                 cardcolLv1.appendChild(card);
                 card.appendChild(cardrowLv2);
+                card.appendChild(cardrowLv3);
                 cardrowLv2.appendChild(cardcol1);
-                cardrowLv2.appendChild(cardcol2);                                                             
-                cardcol2.appendChild(cardb);
+                cardrowLv2.appendChild(cardcol2);
+                cardrowLv2.appendChild(user);
+                cardrowLv2.appendChild(col3row2);
+                col3row2.appendChild(join);                
+                cardrowLv3.appendChild(cardcol3);                                                                             
+                cardcol3.appendChild(cardb);
+                cardb.appendChild(cardimg);
                 card.appendChild(cardf);                                            
                 cardcol1.appendChild(cardtop);
+                cardcol1.appendChild(cardContador);
                 cardcol1.appendChild(cardown);                
 
-                ind = msg[indice];
-                
-                console.log(ind);
-
+               
             }            
             
                 msg.forEach(criarDiv);   
