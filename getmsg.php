@@ -13,6 +13,7 @@ if($result === FALSE) {
 $buscar = mysqli_fetch_all($result);
 
 foreach($result as $buscar) {
+    $id[] = $buscar['id'];
     $pont[] = $buscar['pontos'];
     $busc[] = $buscar['msg'];
     $user[] = $buscar['nome'];
@@ -20,14 +21,22 @@ foreach($result as $buscar) {
 
 $msgpont = array_combine($pont, $busc);
 
+
 krsort($msgpont);
 
 foreach($msgpont as $chave => $valor) {
-    echo "Indice[" . $chave . "] " . $valor . " <br>";
+    //echo "Indice[" . $chave . "] " . $valor . " <br>";
     $ponts[] = $chave;
     $msg[] = $valor;  
 }
 
+$nomeid = array_combine($id, $user);
+
+foreach($nomeid as $idd => $nomes){
+    //echo "Id[" . $idd . "] " . $nomes . " <br>";
+    $iduser[] = $idd;
+    $users[] = $nomes;
+}
 
 mysqli_close($conectar);
 

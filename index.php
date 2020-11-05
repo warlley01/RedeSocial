@@ -34,12 +34,9 @@ include("getmsg.php");
         }
 
         .icoDown:hover {
-            background-color:  #ff981a;
+            background-color: #ff4d4d;
         }
-
-        .btnColorL {
-                        
-        }
+       
 
         .footerCss {
             font-size: 8pt;
@@ -85,11 +82,11 @@ include("getmsg.php");
             
             <div class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login.php">Login</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up</a>
+                    <a class="nav-link" href="cadastro.php">Sign Up</a>
                 </li>   
             </div>         
         </ul>
@@ -106,9 +103,9 @@ include("getmsg.php");
                     
                     <div class="modal-body">                    
                         <form method="POST" action="postmsg.php" enctype="multipart/form-data">
-                            <label>Usuario</label>
-                            <input type="text" name="userInput"><br><br>
-                            <label>Digite sua mensagem</label><br>
+                          <!--  <label>Usuario</label>
+                            <input type="text" name="userInput"><br><br>-->
+                            <label>Título / Link</label><br>
                                 <textarea rows="4" cols="40" name="mensagem"></textarea>                            
                             </div>
                             <input type="hidden" name="size" value="1000000">
@@ -175,9 +172,7 @@ include("getmsg.php");
 
         var ponts = <?php echo json_encode($ponts)?>
 
-        var user = <?php echo json_encode($user) ?>
-
-        var nome = String(user);
+        var iduser = <?php echo json_encode($iduser) ?>
         
 
         function criarDiv(item, indice) {                 
@@ -242,7 +237,7 @@ include("getmsg.php");
                 cardb.textContent = msg[indice];
                 cardContador.classList.add("btn", "contadorStyle", "px-0", "py-0", "my-2", "d-flexbox", "justify-content-center");
                 cardimg.classList.add("card-img-bottom");
-                cardimg.src = "./imagesUpload/836947.jpg";
+                cardimg.src = "./imagesUpload/img-teste.jpg";
                 
                 cardf.classList.add("card-footer", "footerCss", "py-2", "justify-content-start");
 

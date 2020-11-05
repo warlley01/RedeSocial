@@ -17,7 +17,7 @@ if (isset($_POST['upload'])) {
 	$dados = "INSERT INTO bdtabela (msg, img, nome) VALUES ('$text', '$image', '$user')";
 	$result = mysqli_query($conectar, $dados);
 	
-	// colocar imagens da pasta imagesUpload
+	// enviar imagem para pasta imagesUpload
 	if (move_uploaded_file($_FILES['imgInput']['tmp_name'], $target)) {
 		$msg = "Sucessfully";
 	} else {
