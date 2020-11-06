@@ -1,6 +1,7 @@
 <?php
 include("conexao.php");
 include("getmsg.php");
+include("userServer.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +88,10 @@ include("getmsg.php");
 
                 <li class="nav-item">
                     <a class="nav-link" href="cadastro.php">Sign Up</a>
-                </li>   
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>  
             </div>         
         </ul>
     </nav>
@@ -167,13 +171,22 @@ include("getmsg.php");
 
     <script>
 
-        var msg = <?php echo json_encode($msg) ?>
+        function functionTest() {
+            var email = <?php echo json_encode($email); ?>; //erro variavel indefinida quando usuario não está logado
 
+            if(!email){
+                alert("Nenhum usuario logado");
+            } else {
+                alert(email);
+            }            
+        }
+       
 
-        var ponts = <?php echo json_encode($ponts)?>
+        var msg = <?php echo json_encode($msg); ?>;
 
-        var iduser = <?php echo json_encode($iduser) ?>
-        
+        var ponts = <?php echo json_encode($ponts); ?>;
+
+        var iduser = <?php echo json_encode($iduser); ?>;        
 
         function criarDiv(item, indice) {                 
                
@@ -308,8 +321,9 @@ include("getmsg.php");
                 msg.forEach(criarDiv);   
                     
             
+                window.onload = functionTest();
 
-                             
+                                
 
     </script>
 

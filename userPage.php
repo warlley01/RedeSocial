@@ -13,7 +13,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">        
-        <a class="navbar-brand" href="#"><img src="img/logo.png"  width="45" height="32" alt="" loading="lazy"></a>
+        <a class="navbar-brand" href="index.php"><img src="img/logo.png"  width="45" height="32" alt="" loading="lazy"></a>
         <div class="nav ml-5">
             <form class="form-inline my-0 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="search something" aria-label="Search">
