@@ -16,6 +16,7 @@ if(isset($_POST['submitBtn'])) {
     if(!empty($img)){
         $dados = "UPDATE usuarios SET fotoPerfil = '$img' WHERE id = '$id' ";
         $result = mysqli_query($userConnect, $dados);
+        echo "<h2>Imagem Atualizada</h2>" . '<br>';
     }else {
         echo "<h2>Nenhuma imagem enviada</h2>" . '<br>';
     }

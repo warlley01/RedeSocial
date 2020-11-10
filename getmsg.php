@@ -14,10 +14,20 @@ $buscar = mysqli_fetch_all($result);
 
 foreach($result as $buscar) {
     $id[] = $buscar['id'];
-    $pont[] = $buscar['pontos'];
     $busc[] = $buscar['msg'];
+    $img[] = $buscar['img'];
     $user[] = $buscar['nome'];
+    $pont[] = $buscar['pontos'];
 }
+
+$comb = array_combine($user, $img);
+
+foreach($comb as $k => $v){
+    $nomeUser[] = $k;
+    $vImg[] = "./imagePost/".$v;
+}
+
+
 
 $msgpont = array_combine($pont, $busc);
 
@@ -37,6 +47,7 @@ foreach($nomeid as $idd => $nomes){
     $iduser[] = $idd;
     $users[] = $nomes;
 }
+   
 
 mysqli_close($conectar);
 

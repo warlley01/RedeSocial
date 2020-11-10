@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("conexaoUsers.php");
+include("conexao.php");
 
 if(isset($_SESSION['idSession'])){
 
@@ -12,7 +13,6 @@ $result = mysqli_query($userConnect, $select);
 $valor = mysqli_fetch_assoc($result);
 
 //echo $valor['fotoPerfil'];
-
 
 if(empty($valor)){
     $imgUrl = './imagesUpload/' . $valor = 'user_default.png';
@@ -28,7 +28,20 @@ $nome = $valor['nome'];
 $email = $valor['email'];
 
 } else {
-    echo "sessão não existe";
+    //echo "sessão não existe";
+    $email = null;
 }
 
-//session_unset();
+/*
+$nome = $_SESSION['nomeSession']; 
+$selecionar = "SELECT img FROM bdtabela WHERE nome = '$nome' ";
+$result = mysqli_query($conectar, $selecionar);
+$total = mysqli_fetch_assoc($result);
+
+$imageUrl = './imagePost/' . $total['img'];
+
+*/
+
+
+mysqli_close($userConnect);
+mysqli_close($conectar);

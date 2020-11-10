@@ -31,13 +31,18 @@
             
             <div class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
+                    <a class="nav-link" href="login.php" id="loginBtn">Login</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="cadastro.php">Sign Up</a>
-                </li>   
-            </div>         
+                    <a class="nav-link" href="cadastro.php" id="signupBtn">Sign Up</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link" href="userPage.php" id="userBtn"><?php echo $nome; ?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>  
+            </div>            
         </ul>
     </nav>
     
@@ -77,9 +82,26 @@
 
     <script>
 
+        window.onload = functionTest();
+
         function loadFunction(event) {
             var image = document.getElementById("img");
             image.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        function functionTest() {
+
+            var email = <?php echo json_encode($email); ?>; //erro variavel indefinida quando usuario não está logado
+
+            if(email === null){
+            // alert("Nenhum usuario logado");
+                document.getElementById("userBtn").style.display = "none";
+            } else {
+            // alert(email);
+                document.getElementById("loginBtn").style.display = "none";
+                document.getElementById("signupBtn").style.display = "none";
+                document.getElementById("userBtn").style.display = "block";
+            }            
         }
 
     </script>

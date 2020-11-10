@@ -65,7 +65,7 @@ include("userServer.php");
     
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">        
-        <a class="navbar-brand" href="#"><img src="img/logo.png"  width="45" height="32" alt="" loading="lazy"></a>
+        <a class="navbar-brand" href="#"><img src="img/logo.png"  width="40" height="40" alt="" loading="lazy"></a>
         <div class="nav ml-5">
             <form class="form-inline my-0 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="search something" aria-label="Search">
@@ -83,12 +83,14 @@ include("userServer.php");
             
             <div class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
+                    <a class="nav-link" href="login.php" id="loginBtn">Login</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="cadastro.php">Sign Up</a>
+                    <a class="nav-link" href="cadastro.php" id="signupBtn">Sign Up</a>
                 </li> 
+                <li class="nav-item">
+                    <a class="nav-link" href="userPage.php" id="userBtn"><?php echo $nome; ?></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>  
@@ -171,22 +173,34 @@ include("userServer.php");
 
     <script>
 
+        window.onload = functionTest();
+
         function functionTest() {
+
             var email = <?php echo json_encode($email); ?>; //erro variavel indefinida quando usuario não está logado
 
-            if(!email){
-                alert("Nenhum usuario logado");
+            if(email === null){
+               // alert("Nenhum usuario logado");
+                document.getElementById("userBtn").style.display = "none";
             } else {
-                alert(email);
+               // alert(email);
+                document.getElementById("loginBtn").style.display = "none";
+                document.getElementById("signupBtn").style.display = "none";
+                document.getElementById("userBtn").style.display = "block";
             }            
         }
        
 
-        var msg = <?php echo json_encode($msg); ?>;
+        var msg = <?php echo json_encode($msg); ?>;               
 
         var ponts = <?php echo json_encode($ponts); ?>;
 
-        var iduser = <?php echo json_encode($iduser); ?>;        
+        var iduser = <?php echo json_encode($iduser); ?>;  
+        
+        var nomeUser = <?php echo json_encode($nomeUser); ?>;
+
+        var imgUser = <?php echo json_encode($vImg) ; ?>;
+        
 
         function criarDiv(item, indice) {                 
                
@@ -204,7 +218,7 @@ include("userServer.php");
                 var col3row2 = document.createElement('div');
                
                 var user = document.createElement('a');
-                var username = document.createTextNode('warlley');
+                var username = document.createTextNode('<?php echo $nome; ?>');
                 
 
                 var cardtop = document.createElement('a'); //botao like 
@@ -250,7 +264,7 @@ include("userServer.php");
                 cardb.textContent = msg[indice];
                 cardContador.classList.add("btn", "contadorStyle", "px-0", "py-0", "my-2", "d-flexbox", "justify-content-center");
                 cardimg.classList.add("card-img-bottom");
-                cardimg.src = "./imagesUpload/img-teste.jpg";
+                cardimg.src = imgUser[2];
                 
                 cardf.classList.add("card-footer", "footerCss", "py-2", "justify-content-start");
 
@@ -274,7 +288,7 @@ include("userServer.php");
                 report.setAttribute('href', 'report.php');
                 report.appendChild(nomereport);  
 
-                user.setAttribute('href', 'user.php');
+                user.setAttribute('href', 'userPage.php');
                 user.appendChild(username);
 
                 join.setAttribute('href', 'join.php');
@@ -293,7 +307,7 @@ include("userServer.php");
                 cardown.setAttribute('href', 'dislike.php');
                
 
-                cardcol2.src = "./img/profile-photo.png";      
+                cardcol2.src = "<?php echo $imgUrl; ?>";      
                 user.classList.add("my-auto", "mx-2");                                        
 
                 folha.appendChild(cardrow1);  
@@ -318,10 +332,10 @@ include("userServer.php");
                
             }            
             
-                msg.forEach(criarDiv);   
+            msg.forEach(criarDiv);   
                     
             
-                window.onload = functionTest();
+               
 
                                 
 

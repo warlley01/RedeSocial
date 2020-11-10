@@ -13,6 +13,7 @@ if(isset($busca)) {
     header("Location: userPage.php");
     $_SESSION['emailSession'] = $busca['email'];
     $_SESSION['idSession'] = $busca['id'];
+    $_SESSION['nomeSession'] = $busca['nome'];
 } else {
     header("Location: login.php");
 }
